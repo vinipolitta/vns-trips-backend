@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using vns_trips_backend.Data;
 
 namespace vns_trips_backend
 {
@@ -26,7 +28,10 @@ namespace vns_trips_backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddDbContext<DataContext>(
+                    //CONECTAMOS NO BANCO DE DADOS SEJA ELE QUAL FOR la no appsetings json
+                   context => context.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+            );
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
