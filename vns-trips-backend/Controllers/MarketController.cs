@@ -25,7 +25,6 @@ namespace vns_trips_backend.Controllers
                     About = "A Bread & Brakery tem 40 anos de mercado. Fazemos os melhores doces e pães. Compre e confira.",
                     Hours = "Funciona de segunda à sexta, de 8h às 23h",
                 },
-
                 new Market()
                 {
                     Id= 2,
