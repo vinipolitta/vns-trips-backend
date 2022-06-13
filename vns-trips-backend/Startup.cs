@@ -30,7 +30,7 @@ namespace vns_trips_backend
         {
             services.AddDbContext<DataContext>(
                     //CONECTAMOS NO BANCO DE DADOS SEJA ELE QUAL FOR la no appsetings json
-                   context => context.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+                   context => context.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
             services.AddControllers();
             services.AddSwaggerGen(c =>
