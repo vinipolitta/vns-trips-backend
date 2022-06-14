@@ -1,4 +1,6 @@
-﻿namespace vns_trips_backend.Models
+﻿using System.Collections.Generic;
+
+namespace vns_trips_backend.Models
 {
     public class Market
     {

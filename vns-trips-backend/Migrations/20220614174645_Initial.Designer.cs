@@ -10,7 +10,7 @@ using vns_trips_backend.Data;
 namespace vns_trips_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220614102844_Initial")]
+    [Migration("20220614174645_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -179,6 +179,9 @@ namespace vns_trips_backend.Migrations
 
                     b.Property<int>("MarketId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("comments")
                         .HasColumnType("nvarchar(max)");

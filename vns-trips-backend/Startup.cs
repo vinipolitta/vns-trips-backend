@@ -12,7 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using vns_trips_backend.Aplications;
+using vns_trips_backend.Aplications.Contratos;
 using vns_trips_backend.Data;
+using vns_trips_backend.Persistence;
+using vns_trips_backend.Persistence.Contratos;
 
 namespace vns_trips_backend
 {
@@ -33,6 +37,12 @@ namespace vns_trips_backend
                    context => context.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
             services.AddControllers();
+
+            //ADD O SCOPO DO SERVICE
+            services.AddScoped<IMarketService, MarketService>();
+            services.AddScoped<IGeralPersistence, GeralPersistence>();
+            services.AddScoped<IMarketPersistence, MarketPersistence>();
+
             services.AddSwaggerGen(c =>
             {
                 //troca a versao nome swagger

@@ -178,6 +178,9 @@ namespace vns_trips_backend.Migrations
                     b.Property<int>("MarketId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("comments")
                         .HasColumnType("nvarchar(max)");
 
