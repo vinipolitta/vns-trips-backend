@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using ProEventos.Domain;
 using System.Collections.Generic;
 using System.Linq;
 using vns_trips_backend.Data;
-using vns_trips_backend.Models;
 
 namespace vns_trips_backend.Controllers
 {
@@ -29,7 +28,7 @@ namespace vns_trips_backend.Controllers
         [HttpGet("{id}")]
         public Evento GetById(int id)
         {
-            return _context.Eventos.FirstOrDefault(evento => evento.EventoId == id);
+            return _context.Eventos.FirstOrDefault(evento => evento.Id == id);
         }
 
         [HttpPost]
