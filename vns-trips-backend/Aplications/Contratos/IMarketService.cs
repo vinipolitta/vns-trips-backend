@@ -12,5 +12,7 @@ namespace vns_trips_backend.Aplications.Contratos
         Task<Market[]> GetAllMarketsAsync();
         Task<Market[]> GetAllMarketsByNameAsync(string name);
         Task<Market> GetMarketByIdAsync(int marketId);
+        Task<MarketItem> GetMarketItemByIdAsync(int marketId);
+        
     }
 }

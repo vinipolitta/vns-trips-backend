@@ -38,5 +38,13 @@ namespace vns_trips_backend.Persistence
             query = query.AsNoTracking().OrderBy(m => m.Id).Where(m => m.Id == marketId);
             return await query.FirstOrDefaultAsync();
         }
+
+        public async Task<MarketItem> GetMarketItemByIdAsync(int marketId)
+        {
+            IQueryable<MarketItem> query = _context.MarketItems;
+            query = query.AsNoTracking().OrderBy(m => m.Id).Where(m => m.MarketId == marketId);
+            return await query.FirstOrDefaultAsync();
+        }
+        
     }
 }

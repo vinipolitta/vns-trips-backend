@@ -122,5 +122,20 @@ namespace vns_trips_backend.Aplications
             }
         }
 
+        public async Task<MarketItem> GetMarketItemByIdAsync(int marketId)
+        {
+            try
+            {
+                var market = await _marketPersistence.GetMarketItemByIdAsync(marketId);
+                if (market == null) return null;
+
+                return market;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

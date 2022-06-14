@@ -59,29 +59,24 @@ namespace vns_trips_backend.Controllers
             }
         }
 
-        //[HttpGet("{id}/market-itens")]
-        //public async Task<ActionResult> GetByName(int id)
-        //{
-        //    try
-        //    {
-        //        var market = await _marketService.GetMarketByIdAsync(id);
-        //        if (market == null) return NotFound("Item do mercado por ID nao encontrado");
 
-        //        return Ok(market);
+        [HttpGet("{marketId}/markertsItems")]
+        public async Task<ActionResult> GetByIdItem(int marketId)
+        {
+            try
+            {
+                var market = await _marketService.GetMarketItemByIdAsync(marketId);
+                if (market == null) return NotFound("Marcado por id nao encontrado");
 
-        //    }
-        //    catch (Exception ex)
-        //    {
+                return Ok(market);
 
-        //        return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar mercado. Erro: {ex.Message}");
-        //    }
-        //}
+            }
+            catch (Exception ex)
+            {
 
-        //[HttpGet("{marketId}/markertsItems")]
-        //public IEnumerable<MarketItem> GetByIdItem(int marketId)
-        //{
-        //    return _context.MarketItems.Where(mktItem => mktItem.MarketId == marketId);
-        //}
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar mercado. Erro: {ex.Message}");
+            }
+        }
 
         //[HttpGet("{marketId}/reviews")]
         //public IEnumerable<MarketItem> GetByIdIReview(int marketId)
