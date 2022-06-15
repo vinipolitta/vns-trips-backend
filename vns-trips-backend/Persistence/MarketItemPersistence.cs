@@ -17,24 +17,24 @@ namespace vns_trips_backend.Persistence
         }
 
         //Market Items
-        public async Task<MarketItem[]> GetAllMarketitensAsync()
+        public async Task<MarketItem[]> GetAllMarketsItemAsync()
         {
             IQueryable<MarketItem> query = _context.MarketItems;
-            query = query.OrderBy(m => m.Id);
+            query = query.AsNoTracking().OrderBy(m => m.Id);
             return await query.ToArrayAsync();
         }
 
-        public async Task<MarketItem[]> GetAllMarketitensByNameAsync(string name)
+        public async Task<MarketItem[]> GetAllMarketsItemByNameAsync(string address)
         {
             IQueryable<MarketItem> query = _context.MarketItems;
-            query = query.OrderBy(m => m.Id).Where(m => m.Name.ToLower().Contains(name.ToLower()));
+            query = query.AsNoTracking().OrderBy(m => m.Id).Where(m => m.Name.ToLower().Contains(address.ToLower()));
             return await query.ToArrayAsync();
         }
 
         public async Task<MarketItem> GetMarketItemByIdAsync(int marketId)
         {
             IQueryable<MarketItem> query = _context.MarketItems;
-            query = query.OrderBy(m => m.Id).Where(m => m.Id == marketId);
+            query = query.AsNoTracking().OrderBy(m => m.Id).Where(m => m.Id == marketId);
             return await query.FirstOrDefaultAsync();
         }
 

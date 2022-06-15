@@ -1,26 +1,21 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ProEventos.Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using vns_trips_backend.Aplications.Contratos;
-using vns_trips_backend.Data;
 using vns_trips_backend.Models;
 
 namespace vns_trips_backend.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class MarketController : ControllerBase
+    [ApiController]
+    public class MarketItemController : ControllerBase
     {
-        private readonly IMarketService _marketService;
+        private readonly IMarketItemService _marketItemService;
 
-        public MarketController(IMarketService marketService)
+        public MarketItemController(IMarketItemService marketItemService)
         {
-            _marketService = marketService;
+            _marketItemService = marketItemService;
         }
 
         [HttpGet]
@@ -28,7 +23,7 @@ namespace vns_trips_backend.Controllers
         {
             try
             {
-                var markets = await _marketService.GetAllMarketsAsync();
+                var markets = await _marketItemService.GetAllMarketsItemAsync();
                 if (markets == null) return NotFound("Nenhum mercado encontrado");
 
                 return Ok(markets);
@@ -46,25 +41,7 @@ namespace vns_trips_backend.Controllers
         {
             try
             {
-                var market = await _marketService.GetMarketByIdAsync(id);
-                if (market == null) return NotFound("Marcado por id nao encontrado");
-
-                return Ok(market);
-
-            }
-            catch (Exception ex)
-            {
-
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar mercado. Erro: {ex.Message}");
-            }
-        }
-
-        [HttpGet("{marketId}/markerts-items")]
-        public async Task<ActionResult> GetByIdItem(int marketId)
-        {
-            try
-            {
-                var market = await _marketService.GetMarketItemByIdAsync(marketId);
+                var market = await _marketItemService.GetMarketItemByIdAsync(id);
                 if (market == null) return NotFound("Marcado por id nao encontrado");
 
                 return Ok(market);
@@ -78,19 +55,15 @@ namespace vns_trips_backend.Controllers
         }
 
 
-        //[HttpGet("{marketId}/reviews")]
-        //public IEnumerable<MarketItem> GetByIdIReview(int marketId)
-        //{
-        //    return _context.MarketItems.Where(mktItem => mktItem.MarketId == marketId);
-        //}
+        
 
 
         [HttpPost]
-        public async Task<IActionResult> Post(Market model)
+        public async Task<IActionResult> Post(MarketItem model)
         {
             try
             {
-                var market = await _marketService.AddMarket(model);
+                var market = await _marketItemService.AddMarketItem(model);
                 if (market == null) return BadRequest("Erro ao tentar adicionar MARKET");
 
                 return Ok(market);
@@ -105,11 +78,11 @@ namespace vns_trips_backend.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Market model)
+        public async Task<IActionResult> Put(int id, MarketItem model)
         {
             try
             {
-                var market = await _marketService.UpdateMarket(id, model);
+                var market = await _marketItemService.UpdateMarketItem(id, model);
                 if (market == null) return BadRequest("Erro ao tentar atualizar MARKET");
 
                 return Ok(market);
@@ -128,7 +101,7 @@ namespace vns_trips_backend.Controllers
         {
             try
             {
-                return await _marketService.DeleteMarket(id) ?
+                return await _marketItemService.DeleteMarketItem(id) ?
                     Ok("Deletado") :
                     BadRequest("Evento nao deletado");
             }

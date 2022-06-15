@@ -6,8 +6,8 @@ namespace vns_trips_backend.Persistence.Contratos
     public interface IMarketItemPersistence
     {
         //Market Items
-        Task<MarketItem[]> GetAllMarketitensByNameAsync(string address);
-        Task<MarketItem[]> GetAllMarketitensAsync();
+        Task<MarketItem[]> GetAllMarketsItemByNameAsync(string address);
+        Task<MarketItem[]> GetAllMarketsItemAsync();
         Task<MarketItem> GetMarketItemByIdAsync(int marketId);
     }
 }

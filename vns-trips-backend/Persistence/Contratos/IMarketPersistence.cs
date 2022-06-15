@@ -9,6 +9,6 @@ namespace vns_trips_backend.Persistence.Contratos
         Task<Market[]> GetAllMarketsByNameAsync(string name);
         Task<Market[]> GetAllMarketsAsync();
         Task<Market> GetMarketByIdAsync(int marketId);
-        Task<MarketItem> GetMarketItemByIdAsync(int marketId);
+        Task<MarketItem[]> GetMarketItemByIdAsync(int marketId);
     }
 }

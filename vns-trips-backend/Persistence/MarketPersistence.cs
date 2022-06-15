@@ -39,11 +39,11 @@ namespace vns_trips_backend.Persistence
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<MarketItem> GetMarketItemByIdAsync(int marketId)
+        public async Task<MarketItem[]> GetMarketItemByIdAsync(int marketId)
         {
             IQueryable<MarketItem> query = _context.MarketItems;
             query = query.AsNoTracking().OrderBy(m => m.Id).Where(m => m.MarketId == marketId);
-            return await query.FirstOrDefaultAsync();
+            return await query.ToArrayAsync();
         }
         
     }

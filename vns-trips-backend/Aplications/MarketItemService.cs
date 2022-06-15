@@ -6,25 +6,25 @@ using vns_trips_backend.Persistence.Contratos;
 
 namespace vns_trips_backend.Aplications
 {
-    public class MarketService : IMarketService
+    public class MarketItemService: IMarketItemService
     {
         private readonly IGeralPersistence _geralPerisistence;
-        private readonly IMarketPersistence _marketPersistence;
+        private readonly IMarketItemPersistence _marketItemPersistence;
 
-        public MarketService(IGeralPersistence geralPerisistence, IMarketPersistence marketPersistence)
+        public MarketItemService(IGeralPersistence geralPerisistence, IMarketItemPersistence marketItemPersistence)
         {
             _geralPerisistence = geralPerisistence;
-            _marketPersistence = marketPersistence;
+            _marketItemPersistence = marketItemPersistence;
         }
-        public async Task<Market> AddMarket(Market model)
+        public async Task<MarketItem> AddMarketItem(MarketItem model)
         {
             try
             {
-                _geralPerisistence.Add<Market>(model);
+                _geralPerisistence.Add<MarketItem>(model);
 
                 if (await _geralPerisistence.SaveChangesAsync())
                 {
-                    return await _marketPersistence.GetMarketByIdAsync(model.Id);
+                    return await _marketItemPersistence.GetMarketItemByIdAsync(model.Id);
                 }
                 return null;
             }
@@ -37,11 +37,11 @@ namespace vns_trips_backend.Aplications
         }
 
 
-        public async Task<Market> UpdateMarket(int marketId, Market model)
+        public async Task<MarketItem> UpdateMarketItem(int marketId, MarketItem model)
         {
             try
             {
-                var market = await _marketPersistence.GetMarketByIdAsync(marketId);
+                var market = await _marketItemPersistence.GetMarketItemByIdAsync(marketId);
                 if (market == null) return null;
 
                 model.Id = market.Id;
@@ -50,7 +50,7 @@ namespace vns_trips_backend.Aplications
 
                 if (await _geralPerisistence.SaveChangesAsync())
                 {
-                    return await _marketPersistence.GetMarketByIdAsync(model.Id);
+                    return await _marketItemPersistence.GetMarketItemByIdAsync(model.Id);
                 }
                 return null;
             }
@@ -60,14 +60,14 @@ namespace vns_trips_backend.Aplications
             }
         }
 
-        public async Task<bool> DeleteMarket(int marketId)
+        public async Task<bool> DeleteMarketItem(int marketId)
         {
             try
             {
-                var market = await _marketPersistence.GetMarketByIdAsync(marketId);
+                var market = await _marketItemPersistence.GetMarketItemByIdAsync(marketId);
                 if (market == null) throw new Exception("Evento para delete nao foi encontrado");
 
-                _geralPerisistence.Delete<Market>(market);
+                _geralPerisistence.Delete<MarketItem>(market);
                 return await _geralPerisistence.SaveChangesAsync();
 
             }
@@ -77,11 +77,11 @@ namespace vns_trips_backend.Aplications
             }
         }
 
-        public async Task<Market[]> GetAllMarketsAsync()
+        public async Task<MarketItem[]> GetAllMarketsItemAsync()
         {
             try
             {
-                var market = await _marketPersistence.GetAllMarketsAsync();
+                var market = await _marketItemPersistence.GetAllMarketsItemAsync();
                 if (market == null) return null;
 
                 return market;
@@ -92,11 +92,11 @@ namespace vns_trips_backend.Aplications
             }
         }
 
-        public async Task<Market[]> GetAllMarketsByNameAsync(string name)
+        public async Task<MarketItem[]> GetAllMarketsItemByNameAsync(string name)
         {
             try
             {
-                var market = await _marketPersistence.GetAllMarketsByNameAsync(name);
+                var market = await _marketItemPersistence.GetAllMarketsItemByNameAsync(name);
                 if (market == null) return null;
 
                 return market;
@@ -107,11 +107,11 @@ namespace vns_trips_backend.Aplications
             }
         }
 
-        public async Task<Market> GetMarketByIdAsync(int marketId)
+        public async Task<MarketItem> GetMarketItemByIdAsync(int marketId)
         {
             try
             {
-                var market = await _marketPersistence.GetMarketByIdAsync(marketId);
+                var market = await _marketItemPersistence.GetMarketItemByIdAsync(marketId);
                 if (market == null) return null;
 
                 return market;
@@ -121,25 +121,6 @@ namespace vns_trips_backend.Aplications
                 throw new Exception(ex.Message);
             }
         }
-
-        public async Task<MarketItem[]> GetMarketItemByIdAsync(int marketId)
-        {
-            try
-            {
-                var market = await _marketPersistence.GetMarketItemByIdAsync(marketId);
-                if (market == null) return null;
-
-                return market;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-
-
-
 
     }
 }
