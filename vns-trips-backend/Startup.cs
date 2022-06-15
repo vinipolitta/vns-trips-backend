@@ -41,10 +41,13 @@ namespace vns_trips_backend
             //ADD O SCOPO DO SERVICE
             services.AddScoped<IMarketService, MarketService>();
             services.AddScoped<IMarketItemService, MarketItemService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddScoped<IGeralPersistence, GeralPersistence>();
             services.AddScoped<IMarketPersistence, MarketPersistence>();
             services.AddScoped<IMarketItemPersistence, MarketItemPersistence>();
+            services.AddScoped<IOrderPersistence, OrderPersistence>();
+
 
             services.AddSwaggerGen(c =>
             {
